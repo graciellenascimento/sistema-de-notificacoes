@@ -1,6 +1,7 @@
 package com.challenge.sistema_notificacoes.entities;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
@@ -24,6 +25,8 @@ public class Notifications {
     @NotBlank(message = "Insira um tipo")
     private String  type; //tipo de notificação
 
+    private LocalDate creationDate = LocalDate.now(); //data de criação
+
     private  boolean markAsRead = false; //se foi lido ou não pelo usuário
 
     @ManyToOne
@@ -40,9 +43,10 @@ public class Notifications {
         this.user = user;
     }
 
-    public Notifications(String title, String description, boolean markAsRead) {
+    public Notifications(String title, String description, LocalDate creationDate, boolean markAsRead) {
         this.title = title;
         this.description = description;
+        this.creationDate = creationDate;
         this.markAsRead = markAsRead;
     }
 
@@ -89,6 +93,14 @@ public class Notifications {
 
     public void setUserId(Users user) {
         this.user = user;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public boolean GetMarkAsRead() {

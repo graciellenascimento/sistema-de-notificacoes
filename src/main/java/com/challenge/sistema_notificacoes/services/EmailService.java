@@ -2,6 +2,7 @@ package com.challenge.sistema_notificacoes.services;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.challenge.sistema_notificacoes.controller.dto.NotificationsSendDto;
 import com.challenge.sistema_notificacoes.controller.dto.UsersDto;
@@ -14,6 +15,7 @@ public class EmailService {
         this.mailSender = mailSender;
     }
 
+    @Async
     public void sendEmail(UsersDto receiverInfo, NotificationsSendDto emailInfo) {
         var message = new SimpleMailMessage();
 

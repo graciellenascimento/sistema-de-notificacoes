@@ -3,7 +3,6 @@ package com.challenge.sistema_notificacoes.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.*;
 import com.challenge.sistema_notificacoes.controller.dto.NotificationsDto;
 import com.challenge.sistema_notificacoes.controller.dto.NotificationsGetDto;
@@ -15,10 +14,14 @@ import com.challenge.sistema_notificacoes.services.EmailService;
 import com.challenge.sistema_notificacoes.services.NotificationService;
 import com.challenge.sistema_notificacoes.services.UsersService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
-@EnableAsync
-@RequestMapping("/notifications")
+@RequestMapping(value = "/notifications")
 public class NotificationsController {
     
     private NotificationService notificationService;
@@ -33,13 +36,24 @@ public class NotificationsController {
         this.emailService        = emailService;
     }
 
+    @Operation(description = "Cadastro de notificações")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Cadastro concluído com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Falha no cadastro"),
+        @ApiResponse(responseCode = "500", description = "Parâmetros errados")
+    })
     @PostMapping
-    public ResponseEntity<Void> notificationInfo(@RequestBody NotificationsDto dto) {
+    public ResponseEntity<Void> notificationInfo(@RequestBody @Valid NotificationsDto dto) {
         notificationService.notificationInfo(dto);
 
         return ResponseEntity.accepted().build();
     }
 
+    @Operation(description = "Busca todas as notificações atreladas a um usuário")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Busca concluída com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Usuário inexistente")
+    })
     @GetMapping("/{userId}")
     public ResponseEntity<List<NotificationsGetDto>> getNotificationByUserId(@PathVariable("userId") 
                                                                         Long userId) {
@@ -54,6 +68,7 @@ public class NotificationsController {
             new NotificationsGetDto(
                 notification.getTitle(),
                 notification.getDescription(),
+                notification.getCreationDate(),
                 notification.GetMarkAsRead()
             )
     ).collect(Collectors.toList());
@@ -62,6 +77,11 @@ public class NotificationsController {
     }
 }
 
+    @Operation(description = "Marcar como lido")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Notificação lida"),
+        @ApiResponse(responseCode = "400", description = "Não há nenhuma notificação com este ID")
+    })
     @PutMapping("/{notificationId}/mark-as-read")
     public ResponseEntity<Notifications> notificationRead(@PathVariable("notificationId") 
                                                             Long             notificationId, 
@@ -83,6 +103,11 @@ public class NotificationsController {
         }
     }
 
+    @Operation(description = "Envio de e-mail")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "E-mail enviado com sucesso"),
+        @ApiResponse(responseCode = "400", description = "Erro no envio")
+    })
     @GetMapping("/{userId}/send-email")
     public ResponseEntity<List<UsersDto>> sendEmail(@PathVariable("userId") Long userId,
                                                     NotificationsDto dto) {
@@ -115,7 +140,7 @@ public class NotificationsController {
                 }
             }
 
-            return ResponseEntity.ok(userDto);
+            return ResponseEntity.ok().build();
 
         } else{
             return ResponseEntity.notFound().build(); 
