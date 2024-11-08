@@ -8,7 +8,6 @@ public record NotificationsDto(String title,
                                String type,
                                Users user) {
 
-                                
     public Notifications toNotifications() {
         return new Notifications(
             title,
@@ -17,5 +16,7 @@ public record NotificationsDto(String title,
             user
         );
     }
+
+
 
 }

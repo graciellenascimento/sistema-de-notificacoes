@@ -57,7 +57,4 @@ public class Users {
         this.notificationChannel = notificationChannel;
     }
 
-
-    
-
 }

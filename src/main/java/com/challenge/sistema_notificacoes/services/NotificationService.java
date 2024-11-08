@@ -29,13 +29,5 @@ public class NotificationService {
     public Optional<Notifications> findById(Long notificationId){
         return notificationsRepository.findById(notificationId);
     }
-
-    // public Optional<Notifications> notificationIsRead(Long notificationId, Notifications notificationIsRead){
-    //     return notificationsRepository.findById(notificationId).map(
-    //         notificationRead -> {
-    //             notificationRead.setMarkAsRead(true);
-    //         }
-    //     );
-    // }
     
 }

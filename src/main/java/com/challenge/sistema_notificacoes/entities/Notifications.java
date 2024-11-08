@@ -30,6 +30,12 @@ public class Notifications {
         this.user = user;
     }
 
+    public Notifications(String title, String description, boolean markAsRead) {
+        this.title = title;
+        this.description = description;
+        this.markAsRead = markAsRead;
+    }
+
     public Long getNotificationId() {
         return notificationId;
     }
@@ -70,7 +76,7 @@ public class Notifications {
         this.user = user;
     }
 
-    public boolean isMarkAsRead() {
+    public boolean GetMarkAsRead() {
         return markAsRead;
     }
 
