@@ -1,5 +1,7 @@
 package com.challenge.sistema_notificacoes.entities;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +12,9 @@ public class NotificationChannel {
 
     private Long    notificationChannelId;
     private String  chosenService; //canal escolhido para recebimento das notificações
+
+    @OneToMany(mappedBy = "notificationChannel")
+    private List<Users> users;
 
     public NotificationChannel() {
     }
@@ -31,7 +36,12 @@ public class NotificationChannel {
     public void setChosenService(String chosenService) {
         this.chosenService = chosenService;
     }
-
+    public List<Users> getUser() {
+        return users;
+    }
+    public void setUser(List<Users> users) {
+        this.users = users;
+    }
     public enum notificationServices {
         email((long) 1, "email"),
         push((long) 2, "push");

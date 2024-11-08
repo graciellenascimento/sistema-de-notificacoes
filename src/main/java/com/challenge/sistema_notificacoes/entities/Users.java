@@ -1,5 +1,7 @@
 package com.challenge.sistema_notificacoes.entities;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +13,9 @@ public class Users {
     private Long    userId;
     private String  userName; //nome do usuário
     private String  userEmail; //email do usuário
+
+    @OneToMany(mappedBy = "user")
+    private List<Notifications> notifications;
 
     @ManyToOne
     @JoinColumn(name = "notificationChannelId")
@@ -31,18 +36,28 @@ public class Users {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public NotificationChannel getNotificationService() {
-        return notificationChannel;
-    }
-    public void setNotificationService(NotificationChannel notificationService) {
-        this.notificationChannel = notificationService;
-    }
     public String getUserEmail() {
         return userEmail;
     }
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public List<Notifications> getNotifications() {
+        return notifications;
+    }
+    public void setNotifications(List<Notifications> notifications) {
+        this.notifications = notifications;
     } 
+
+    public NotificationChannel getNotificationChannel() {
+        return notificationChannel;
+    }
+    public void setNotificationChannel(NotificationChannel notificationChannel) {
+        this.notificationChannel = notificationChannel;
+    }
+
+
     
 
 }

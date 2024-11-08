@@ -19,10 +19,6 @@ public class Notifications {
     @ManyToOne
     @JoinColumn(name = "userId")
     private Users user; //pessoa que receberá a notificação
-    
-    @ManyToOne
-    @JoinColumn(name = "notificationChannelId")
-    private NotificationChannel notificationService; //canal escolhido para receber as notificações
 
     public Notifications() {
     }
@@ -70,16 +66,8 @@ public class Notifications {
         return user;
     }
 
-    public void setUserId(Users userId) {
-        this.user = userId;
-    }
-
-    public NotificationChannel getNotificationService() {
-        return notificationService;
-    }
-
-    public void setNotificationService(NotificationChannel notificationService) {
-        this.notificationService = notificationService;
+    public void setUserId(Users user) {
+        this.user = user;
     }
 
     public boolean isMarkAsRead() {
