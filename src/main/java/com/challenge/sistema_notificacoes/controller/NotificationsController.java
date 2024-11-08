@@ -123,27 +123,4 @@ public class NotificationsController {
 
     }
 
-    // @GetMapping("/{userId}/send-email")
-    // @MessageMapping("/push")
-    // @SendTo("/topic/push")
-    // public Notifications sendPush(final NotificationsDto message) throws InterruptedException {
-    //     Thread.sleep(1000);
-        
-    //     return new Notifications(HtmlUtils.htmlEscape(message.toNotifications()));
-
-    //     var notificationIsRead = notificationService.findById(notificationId);
-        
-    //     if(notificationIsRead.isPresent()){
-    //         Notifications notification = notificationIsRead.get();
-
-    //         notification.setMarkAsRead(true);
-    //         notificationService.notificationInfo(dto);
-    //         ResponseEntity.accepted().build();
-
-    //         return ResponseEntity.ok(notification);
-    //     } else{
-    //         return ResponseEntity.notFound().build();
-    //     }
-    // }    
-
 }
