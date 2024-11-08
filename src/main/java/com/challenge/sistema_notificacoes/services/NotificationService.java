@@ -2,9 +2,7 @@ package com.challenge.sistema_notificacoes.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
-
 import com.challenge.sistema_notificacoes.controller.dto.NotificationsDto;
 import com.challenge.sistema_notificacoes.entities.Notifications;
 import com.challenge.sistema_notificacoes.repository.NotificationsRepository;

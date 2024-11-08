@@ -1,8 +1,11 @@
 package com.challenge.sistema_notificacoes.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
+@Valid
 @Table(name = "t_notifications")
 
 public class Notifications {
@@ -11,9 +14,16 @@ public class Notifications {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     private Long    notificationId;
+
+    @NotBlank(message = "Insira um título")
     private String  title; //título da notificação
+
+    @NotBlank(message = "Insira uma descrição")
     private String  description; //corpo da notificação
+
+    @NotBlank(message = "Insira um tipo")
     private String  type; //tipo de notificação
+
     private  boolean markAsRead = false; //se foi lido ou não pelo usuário
 
     @ManyToOne
@@ -34,6 +44,11 @@ public class Notifications {
         this.title = title;
         this.description = description;
         this.markAsRead = markAsRead;
+    }
+
+    public Notifications(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public Long getNotificationId() {

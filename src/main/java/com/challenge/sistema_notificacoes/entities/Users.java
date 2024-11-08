@@ -24,6 +24,12 @@ public class Users {
     public Users() {
     }
 
+    public Users(String userName, String userEmail, NotificationChannel notificationChannel) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.notificationChannel = notificationChannel;
+    }
+
     public Long getUserId() {
         return userId;
     }
