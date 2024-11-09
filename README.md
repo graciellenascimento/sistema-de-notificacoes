@@ -49,17 +49,18 @@ docker-compose up -d
    }
 }</code></pre>
 
-<h4>1. Visualizar notificações por usuário:</h4>
+<h4>2. Visualizar notificações por usuário:</h4>
  <p>Método <b>GET</b> <code>/notifications/{userId}</code></p>
  <p>Retorna todas as notificações para o usuário com o <code>userId</code> informado.</p>
 
-<h4>1. Marcar notificação como lida:</h4>
+<h4>3. Marcar notificação como lida:</h4>
  <p>Método <b>PUT</b> <code>/notifications/{notificationId}/mark-as-read</code></p>
  <pre><code>{
   "markAsRead":true
 }</code></pre>
 
-<h4>1. Enviar e-mail:</h4>
+<h4>4. Enviar e-mail:</h4>
+ <p>Método <b>GET</b> <code>/notifications/{userId}/send-email</code></p>
  <p>O envio de e-mails é realizado de forma assíncrona utilizando a anotação <code>@Async</code>. 
    Quando uma notificação é criada, se o canal de notificação for e-mail, a aplicação dispara um e-mail para o usuário. Para o envio, foi utilizado o <code>JavaMailSender</code>.</p>
 
